@@ -37,8 +37,7 @@ class Facepp
      */
     public function execute($method, array $params)
     {
-        if( ! $this->apiPropertiesAreSet())
-        {
+        if( ! $this->apiPropertiesAreSet()) {
             throw new Exception('API properties are not set');
         }
 
@@ -91,13 +90,11 @@ class Facepp
 
     private function apiPropertiesAreSet()
     {
-        if( ! $this->api_key)
-        {
+        if( ! $this->api_key) {
             return false;
         }
 
-        if( ! $this->api_secret)
-        {
+        if( ! $this->api_secret) {
             return false;
         }
         
