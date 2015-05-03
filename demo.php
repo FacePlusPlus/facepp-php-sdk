@@ -4,8 +4,8 @@ require_once 'facepp_sdk.php';
 ###     example      ###
 ########################
 $facepp = new Facepp();
-$faceapp->api_key       = '{your_key_here}';
-$faceapp->api_secret    = '{your_secret_here}';
+$facepp->api_key       = '{your_key_here}';
+$facepp->api_secret    = '{your_secret_here}';
 
 #detect local image 
 $params['img']          = '{image file path}';
