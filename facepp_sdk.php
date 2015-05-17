@@ -53,7 +53,11 @@ class Facepp
         curl_setopt($curl_handle, CURLOPT_URL, $request_url);
         curl_setopt($curl_handle, CURLOPT_FILETIME, true);
         curl_setopt($curl_handle, CURLOPT_FRESH_CONNECT, false);
-        curl_setopt($curl_handle, CURLOPT_CLOSEPOLICY, CURLCLOSEPOLICY_LEAST_RECENTLY_USED);
+        if(version_compare(phpversion(),"5.5","<=")){
+            curl_setopt($curl_handle, CURLOPT_CLOSEPOLICY,CURLCLOSEPOLICY_LEAST_RECENTLY_USED);
+        }else{
+            curl_setopt($curl_handle, CURLOPT_SAFE_UPLOAD, false);
+        }
         curl_setopt($curl_handle, CURLOPT_MAXREDIRS, 5);
         curl_setopt($curl_handle, CURLOPT_HEADER, false);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, true);
@@ -62,6 +66,7 @@ class Facepp
         curl_setopt($curl_handle, CURLOPT_NOSIGNAL, true);
         curl_setopt($curl_handle, CURLOPT_REFERER, $request_url);
         curl_setopt($curl_handle, CURLOPT_USERAGENT, $this->useragent);
+        
 
         if (extension_loaded('zlib')) {
             curl_setopt($curl_handle, CURLOPT_ENCODING, '');
