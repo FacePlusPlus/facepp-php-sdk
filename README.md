@@ -1,17 +1,49 @@
-PHP SDK for Face++
-================
-1. Register user on http://www.faceplusplus.com. 
+# Open API SDK for php developers
 
-2. Create an App on DevCenter to obtain API_KEY & API_SECRET. 
+## Requirements
 
-3. Open facepp_sdk.php.
+- PHP 5.5.9+.
+- cURL extension.
+- GD extension.
 
-4. If you choose Amazon(US) server, please uncomment the 'http://apius.faceplusplus.com/v2' or 'https://apius.faceplusplus.com/v2' in line 21 - 24
+## Structure
+```
+├── FppClient.php              // the api client
+└── lib
+    ├── Adapter.php            // the http request adapter, all request be sended by it
+    ├── ContentTypes.php       // request body content type
+    ├── Image.php              // the image process unit
+    ├── MimeTypes.php          // the request body mime type
+    ├── MultiPartForm.php      // multipart/for-data request class
+    ├── Request.php            // the request class
+    ├── RequestException.php   // exception
+    └── Response.php           // the response class
+```
 
-5. Add the API_KEY & API_SECRET to be a standard in line 27 & 28 or assign them dynamicly to your object.
-     
-        <?php
-            $facepp = new Facepp();
-            $facepp->api_key    = '{YOUR_KEY_HERE}';
-            $facepp->api_secret = '{YOUR_SECRET_HERE}';
-        ?>
+## Example
+
+```php
+include_once 'FppClient.php';
+
+use Fpp\FppClient;
+
+$host = 'https://api-cn.faceplusplus.com';
+$apiKey = '<Your Key>';
+$apiSecret = '<Your Secret>';
+
+$client = new FppClient($apiKey, $apiSecret, $host);
+
+$data = array(
+    'image_url' => "https://www.faceplusplus.com.cn/scripts/demoScript/images/demo-pic10.jpg",
+    'return_landmark' => '2',
+    'return_attributes' => 'age,headpose'
+);
+
+$resp = $client->detectFace($data);
+var_dump($resp);
+
+```
+
+## License
+
+licensed under the MIT
