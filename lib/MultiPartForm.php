@@ -118,11 +118,11 @@ class MultiPartForm
 
         // Flatten the list and add closing boundary marker,
         // then return CR+LF separated data
-        $parts = array_map(function($val) {return join($val, "\r\n");}, $parts);
+        $parts = array_map(function($val) {return implode("\r\n", $val);}, $parts);
         $end_boundary = $part_boundary . "--";
         array_push($parts, $end_boundary);
 
-        return join($parts, "\r\n");
+        return implode("\r\n", $parts);
     }
 }
 ?>
