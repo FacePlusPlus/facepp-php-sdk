@@ -195,11 +195,7 @@ class Adapter{
         }
 
         // chmod the file as 0755
-        if ($this->cacertLocation === true) {
-            curl_setopt($ch, CURLOPT_CAINFO, dirname(__FILE__) . '/cacert.pem');
-        } elseif (is_string($this->cacertLocation)) {
-            curl_setopt($ch, CURLOPT_CAINFO, $this->cacertLocation);
-        }
+       
 
         $content = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
